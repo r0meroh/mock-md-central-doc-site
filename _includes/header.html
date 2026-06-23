@@ -1,0 +1,26 @@
+<header class="site-header">
+  <div class="header-inner">
+    <a class="site-logo" href="{{ '/' | relative_url }}">
+      <span class="logo-icon">📚</span>
+      <span class="logo-text">{{ site.title }}</span>
+    </a>
+
+    <nav class="header-nav" aria-label="Main navigation">
+      <a href="{{ '/' | relative_url }}" class="nav-link {% if page.url == '/' %}active{% endif %}">Home</a>
+      <a href="{{ '/docs/getting-started/' | relative_url }}" class="nav-link">Getting Started</a>
+      <a href="{{ '/docs/guides/' | relative_url }}" class="nav-link">Guides</a>
+      <a href="{{ '/docs/reference/' | relative_url }}" class="nav-link">Reference</a>
+    </nav>
+
+    <div class="header-actions">
+      {% if site.search_enabled %}
+        <button class="search-toggle" aria-label="Toggle search">🔍</button>
+      {% endif %}
+      {% if site.aux_links %}
+        {% for link in site.aux_links %}
+          <a class="aux-link" href="{{ link[1][0] }}" target="_blank" rel="noopener">{{ link[0] }}</a>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+</header>

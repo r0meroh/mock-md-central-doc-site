@@ -1,0 +1,75 @@
+# ============================================================
+#  Site Configuration — Jekyll + GitHub Pages
+# ============================================================
+
+title: "DocHub"
+description: >-
+  A centralized, Confluence-style documentation site powered by
+  Jekyll and hosted on GitHub Pages. Write in Markdown, ship as
+  a fully navigable, cross-linked knowledge base.
+baseurl: ""           # leave empty if deploying to <org>.github.io/<repo>
+url: ""               # set to your GitHub Pages URL, e.g. https://acme.github.io
+
+# ---- Theme ------------------------------------------------
+remote_theme: just-the-docs/just-the-docs   # popular docs theme
+# theme: minima                             # fallback if remote_theme is unavailable
+
+# ---- just-the-docs options --------------------------------
+color_scheme: light          # light | dark
+search_enabled: true
+search:
+  heading_level: 2
+  previews: 3
+  preview_words_before: 5
+  preview_words_after: 10
+  tokenizer_separator: /[\s/]+/
+  rel_url: true
+  button: false
+
+# Auxiliary links in top-right nav bar
+aux_links:
+  "View on GitHub":
+    - "https://github.com/{{ site.github.owner_name }}/{{ site.github.repository_name }}"
+
+aux_links_new_tab: true
+
+# Footer
+footer_content: "Powered by <a href=\"https://jekyllrb.com\">Jekyll</a> &amp; <a href=\"https://github.com/just-the-docs/just-the-docs\">Just the Docs</a>. Hosted on <a href=\"https://pages.github.com\">GitHub Pages</a>."
+
+# ---- Collections (doc groups) ----------------------------
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+
+# ---- Build settings --------------------------------------
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# Files and directories to exclude from the build
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .bundle
+  - .sass-cache
+  - "*.sh"
+  - "*.bat"
