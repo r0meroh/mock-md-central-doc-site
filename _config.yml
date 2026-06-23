@@ -7,8 +7,8 @@ description: >-
   A centralized, Confluence-style documentation site powered by
   Jekyll and hosted on GitHub Pages. Write in Markdown, ship as
   a fully navigable, cross-linked knowledge base.
-baseurl: ""           # leave empty if deploying to <org>.github.io/<repo>
-url: ""               # set to your GitHub Pages URL, e.g. https://acme.github.io
+baseurl: "/mock-md-central-doc-site"  # repo name, required for project sites
+url: "https://r0meroh.github.io"      # GitHub Pages root URL
 
 # ---- Theme ------------------------------------------------
 remote_theme: just-the-docs/just-the-docs   # popular docs theme
@@ -29,7 +29,7 @@ search:
 # Auxiliary links in top-right nav bar
 aux_links:
   "View on GitHub":
-    - "https://github.com/{{ site.github.owner_name }}/{{ site.github.repository_name }}"
+    - "https://github.com/r0meroh/mock-md-central-doc-site"
 
 aux_links_new_tab: true
 
