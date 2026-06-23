@@ -141,6 +141,7 @@ Alignment:
 
 Jekyll supports [Liquid](https://shopify.github.io/liquid/) templating inside Markdown:
 
+{% raw %}
 ```liquid
 {{ site.title }}                          ← outputs site title from _config.yml
 {{ page.title }}                          ← current page title
@@ -151,6 +152,7 @@ Jekyll supports [Liquid](https://shopify.github.io/liquid/) templating inside Ma
 {% for item in site.pages %}…{% endfor %} ← loop
 {% include filename.html %}               ← embed a partial
 ```
+{% endraw %}
 
 ---
 
