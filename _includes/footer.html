@@ -1,0 +1,12 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <p>{{ site.footer_content }}</p>
+    <p class="footer-edit">
+      {% if site.github.repository_url %}
+        <a href="{{ site.github.repository_url }}/edit/main/{{ page.path }}" target="_blank" rel="noopener">
+          ✏️ Edit this page on GitHub
+        </a>
+      {% endif %}
+    </p>
+  </div>
+</footer>

@@ -1,0 +1,39 @@
+<aside class="sidebar" id="sidebar" aria-label="Documentation navigation">
+  <nav class="sidebar-nav">
+
+    {% assign nav_pages = site.pages | sort: "nav_order" %}
+
+    {% comment %} Group pages by their `parent` front matter key {% endcomment %}
+    {% assign top_level = nav_pages | where_exp: "p", "p.nav_exclude != true and p.parent == nil and p.title != nil" %}
+
+    {% for page in top_level %}
+      {% assign is_active = false %}
+      {% if page.url == page_url or page.url contains current_path %}
+        {% assign is_active = true %}
+      {% endif %}
+
+      <div class="nav-section">
+        <a href="{{ page.url | relative_url }}"
+           class="nav-section-title {% if page.url == page.url %}{% endif %}"
+           {% if page.has_children %}aria-expanded="true"{% endif %}>
+          {{ page.title }}
+        </a>
+
+        {% assign children = nav_pages | where: "parent", page.title %}
+        {% if children.size > 0 %}
+          <ul class="nav-children">
+            {% for child in children %}
+              <li>
+                <a href="{{ child.url | relative_url }}"
+                   class="nav-child-link {% if child.url == page.url %}active{% endif %}">
+                  {{ child.title }}
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+  </nav>
+</aside>
