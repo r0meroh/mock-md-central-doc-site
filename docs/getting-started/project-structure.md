@@ -77,4 +77,4 @@ Every Markdown page starts with a YAML block between `---` delimiters. This tell
 
 ### `_layouts/` vs `_includes/`
 - **Layouts** are full-page wrappers. A page picks exactly one layout via `layout: default` in front matter.
-- **Includes** are reusable snippets you can embed anywhere with `{% include filename.html %}`.
+- **Includes** are reusable snippets you can embed anywhere with `{% raw %}{% include filename.html %}{% endraw %}`.
