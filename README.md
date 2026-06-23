@@ -87,6 +87,7 @@ repo-root/
 ├── assets/
 │   ├── css/style.css          ← All custom styles (CSS variables, layout, components)
 │   ├── images/                ← Screenshots, diagrams, and other image assets
+│   │   └── <page-name>/       ← One subdirectory per page (matches the page title slug)
 │   └── js/                    ← Optional JavaScript
 │
 ├── docs/                      ← All documentation content
@@ -311,34 +312,60 @@ git push -u origin docs/update-installation-guide
 
 ### Images
 
-1. **Place the image file** in `assets/images/`:
+Images are organized by page. Every page that uses images gets its own subdirectory named after the page's title slug (lowercase, hyphens, no spaces) under `assets/images/`:
+
+```
+assets/images/<page-name>/<image-files>
+```
+
+**Examples:**
+
+```
+assets/images/configure-sso/saml-flow.png
+assets/images/configure-sso/idp-settings-screenshot.png
+assets/images/installation/ruby-version-check.png
+assets/images/api-endpoints/request-lifecycle.svg
+```
+
+1. **Create the page directory and place your image inside it:**
 
 ```bash
-cp ~/Downloads/architecture-diagram.png assets/images/
-git add assets/images/architecture-diagram.png
+mkdir -p assets/images/configure-sso
+cp ~/Downloads/saml-flow.png assets/images/configure-sso/
+git add assets/images/configure-sso/saml-flow.png
 ```
 
 2. **Reference it in your Markdown page:**
 
 ```markdown
-![Architecture diagram](/assets/images/architecture-diagram.png)
+![SAML flow diagram](/assets/images/configure-sso/saml-flow.png)
 ```
 
 3. **For diagrams that need to scale**, use relative_url:
 
 ```liquid
-![Architecture diagram]({{ '/assets/images/architecture-diagram.png' | relative_url }})
+![SAML flow diagram]({{ '/assets/images/configure-sso/saml-flow.png' | relative_url }})
 ```
+
+### Naming the Image Directory
+
+The directory name must match the **slugified page title** — the same lowercase-hyphenated string you use for the `.md` filename:
+
+| Page title (front matter) | `.md` filename | Image directory |
+|---|---|---|
+| `Configure SSO` | `configure-sso.md` | `assets/images/configure-sso/` |
+| `API Endpoints` | `api-endpoints.md` | `assets/images/api-endpoints/` |
+| `Installation` | `installation.md` | `assets/images/installation/` |
 
 ### Image Best Practices
 
 | Guideline | Why |
 |---|---|
+| One subdirectory per page (`assets/images/<page-name>/`) | Keeps images scoped to the page that uses them |
 | Use descriptive file names (`sso-flow.png` not `img1.png`) | Easier to reference and maintain |
 | Prefer SVG for diagrams | Scales to any screen size without blurring |
 | Keep files under 500 KB | Keeps the repository lean and Pages loads fast |
 | Always add `alt` text | Accessibility and SEO |
-| Store images in `assets/images/` | Consistent, predictable paths |
 
 ### Uploading via GitHub Web UI
 
@@ -346,9 +373,11 @@ You can also upload files without a local Git setup:
 
 ```
 1. Navigate to assets/images/ on GitHub
-2. Click "Add file" → "Upload files"
-3. Drag and drop your image(s)
-4. Commit directly to main (for assets) or via a PR
+2. Click "Add file" → "Create new file"
+3. In the file name field, type: <page-name>/your-image.png
+   (GitHub will automatically create the subdirectory)
+4. Switch to the "Upload files" tab and drag and drop your image(s)
+5. Commit directly to main (for assets) or via a PR
 ```
 
 ```
@@ -358,9 +387,11 @@ GitHub folder view: assets/images/
 │                                               ┌────┐ │
 │  Name              Last commit    Date        │Add │ │
 │  ──────────────    ──────────     ──────      │file│ │
-│  .gitkeep          Initial        Jun 23      └────┘ │
+│  configure-sso/    Add SSO imgs   Jun 23      └────┘ │
+│  installation/     Add install    Jun 23              │
+│  .gitkeep          Initial        Jun 23              │
 │                                                      │
-│         ↑ Click "Add file" → "Upload files"          │
+│  ↑ Each page gets its own subdirectory               │
 └──────────────────────────────────────────────────────┘
 ```
 
